@@ -1,65 +1,104 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public Text enemyText;
 
-    public Button schereB;
-    public Text schereT;
-    public Button steinB;
-    public Text steinT;
-    public Button papierB;
-    public Text papierT;
-
     public GameObject resultPanel;
     public Text resultText;
+
+    public Button enemyButton;
+    public Button[] buttonList;
 
     void Awake()
     {
         resultPanel.SetActive(false);
     }
-    public string createRandomSSP()
+
+
+    public string CreateRandomChoice()
     {
-        int rand = Random.Range(1, 3);
+        int rand = Random.Range(1, 4);
         if (rand == 1)
         {
             return "Schere";
         }
-        if (rand == 2)
+        else if (rand == 2)
         {
             return "Stein";
         }
-        if (rand == 3)
+        else if (rand == 3)
         {
             return "Papier";
         }
-        return "nothing";
+        else
+        {
+            return "nothing";
+        }
     }
 
     public void PlayGame()
     {
-        string playerChoice = 
-        enemyText.text = createRandomSSP();
-        string winner = DecideWinner(playerChoice);
-        if(winner == "player")
+        string playerChoice = EventSystem.current.currentSelectedGameObject.gameObject.GetComponent<PlayerChoice>().GetChoice();
+        string enemyChoice = CreateRandomChoice();
+        enemyText.text = enemyChoice;
+        string winner = DecideWinner(playerChoice,enemyChoice);
+        if(winner=="player")
         {
-
+            resultPanel.SetActive(true);
+            resultText.text = "Du hast gewonnen!";
         }
-        else if(winner == "enemy")
+        else if (winner == "enemy")
         {
-
+            resultPanel.SetActive(true);
+            resultText.text = "Du hast verloren!";
         }
         else
         {
+            resultPanel.SetActive(true);
+            resultText.text = "Unentschieden!";
+            
+        }
+        SetButtonActivation(false);
+    }
 
+    public string DecideWinner(string playerChoice, string enemyChoice)
+    {
+        if ((playerChoice=="Schere" && enemyChoice == "Papier")||
+            (playerChoice=="Papier" && enemyChoice == "Stein")||
+            (playerChoice=="Stein" && enemyChoice == "Schere"))
+        {
+            return "player";
+        }
+        else if ((enemyChoice == "Schere" && playerChoice == "Papier") ||
+            (enemyChoice == "Papier" && playerChoice == "Stein") ||
+            (enemyChoice == "Stein" && playerChoice == "Schere"))
+        {
+            return "enemy";
+        }
+        else
+        {
+            return "draw";
         }
     }
 
-    public string DecideWinner()
+    public void Reset()
     {
-
+        SetButtonActivation(true);
+        resultPanel.SetActive(false);
     }
+
+    public void SetButtonActivation(bool toggle)
+    {
+        for(int i = 0; i < buttonList.Length; i++)
+        {
+            buttonList[i].GetComponentInParent<Button>().interactable = toggle;
+        }
+        enemyButton.GetComponentInParent<Button>().interactable = toggle;
+    }
+
 }
