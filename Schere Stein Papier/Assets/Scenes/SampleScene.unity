@@ -1081,7 +1081,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 
+  m_Text: ...
 --- !u!222 &759451191
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1217,7 +1217,7 @@ MonoBehaviour:
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
+    m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 
@@ -1278,8 +1278,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyText: {fileID: 759451190}
+  background: {fileID: 2072107681}
   resultPanel: {fileID: 1543395979}
   resultText: {fileID: 925527206}
+  enemyButton: {fileID: 103822553}
   buttonList:
   - {fileID: 1955235443}
   - {fileID: 188582978}
@@ -1310,7 +1312,7 @@ GameObject:
   - component: {fileID: 1438135403}
   - component: {fileID: 1438135402}
   m_Layer: 5
-  m_Name: Gegner
+  m_Name: GegnerText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

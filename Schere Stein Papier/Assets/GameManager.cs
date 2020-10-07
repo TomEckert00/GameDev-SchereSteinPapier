@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
 {
     public Text enemyText;
 
+    public GameObject background;
+
     public GameObject resultPanel;
     public Text resultText;
 
@@ -50,20 +52,28 @@ public class GameManager : MonoBehaviour
         if(winner=="player")
         {
             resultPanel.SetActive(true);
+            ChangeBackgroundColor(new Color(0,255,0,255));
             resultText.text = "Du hast gewonnen!";
         }
         else if (winner == "enemy")
         {
             resultPanel.SetActive(true);
+            ChangeBackgroundColor(new Color(255, 0, 0, 255));
             resultText.text = "Du hast verloren!";
         }
         else
         {
             resultPanel.SetActive(true);
+            ChangeBackgroundColor(new Color(30, 200, 200, 255));
             resultText.text = "Unentschieden!";
             
         }
         SetButtonActivation(false);
+    }
+
+    private void ChangeBackgroundColor(Color color)
+    {
+        background.GetComponent<Image>().color = color;
     }
 
     public string DecideWinner(string playerChoice, string enemyChoice)
@@ -90,6 +100,7 @@ public class GameManager : MonoBehaviour
     {
         SetButtonActivation(true);
         resultPanel.SetActive(false);
+        ChangeBackgroundColor(new Color(255, 255, 255, 255));
     }
 
     public void SetButtonActivation(bool toggle)
