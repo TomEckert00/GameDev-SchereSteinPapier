@@ -115,4 +115,10 @@ public class GameManager : MonoBehaviour
         enemyButton.GetComponentInParent<Button>().interactable = toggle;
     }
 
+    public void WronButtonPushed()
+    {
+        resultPanel.SetActive(true);
+        resultText.text = "Falscher Knopf du Idiot!";
+    }
+
 }
