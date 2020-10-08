@@ -16,8 +16,11 @@ public class GameManager : MonoBehaviour
     public Button enemyButton;
     public Button[] buttonList;
 
+    private Color startColor;
+
     void Awake()
     {
+        startColor = background.GetComponent<Image>().color;
         resultPanel.SetActive(false);
     }
 
@@ -64,7 +67,7 @@ public class GameManager : MonoBehaviour
         else
         {
             resultPanel.SetActive(true);
-            ChangeBackgroundColor(new Color(30, 200, 200, 255));
+            ChangeBackgroundColor(startColor);
             resultText.text = "Unentschieden!";
             
         }
@@ -100,7 +103,7 @@ public class GameManager : MonoBehaviour
     {
         SetButtonActivation(true);
         resultPanel.SetActive(false);
-        ChangeBackgroundColor(new Color(255, 255, 255, 255));
+        ChangeBackgroundColor(startColor);
     }
 
     public void SetButtonActivation(bool toggle)
